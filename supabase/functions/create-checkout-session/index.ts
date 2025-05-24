@@ -1,6 +1,5 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import Stripe from 'npm:stripe@14.14.0';
-import { createClient } from 'npm:@supabase/supabase-js';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') ?? '', {
   apiVersion: '2023-10-16',
@@ -27,7 +26,7 @@ serve(async (req) => {
       mode: 'subscription',
       line_items: [
         {
-          price: planId, // This should match your Stripe price ID
+          price: planId,
           quantity: 1,
         },
       ],

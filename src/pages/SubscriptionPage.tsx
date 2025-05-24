@@ -1,14 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { loadStripe } from '@stripe/stripe-js';
-import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import subscriptionPlans from '../data/subscriptionData';
 import Button from '../components/ui/Button';
-
-// Initialize Stripe
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const SubscriptionPage = () => {
   const [loading, setLoading] = useState(false);
@@ -26,32 +21,11 @@ const SubscriptionPage = () => {
         return;
       }
 
-      // Create a checkout session
-      const { data: { sessionId }, error: checkoutError } = await supabase.functions.invoke('create-checkout-session', {
-        body: {
-          planId,
-          userId: user.id,
-          email: user.email,
-        },
+      // Navigate to card details page with plan info
+      navigate('/subscription/card-details', { 
+        state: { planId } 
       });
-
-      if (checkoutError) {
-        throw new Error(checkoutError.message);
-      }
-
-      // Redirect to Stripe Checkout
-      const stripe = await stripePromise;
-      if (!stripe) {
-        throw new Error('Stripe failed to initialize');
-      }
-
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId,
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
-      }
+      
     } catch (err: any) {
       setError(err.message || 'Failed to process subscription');
     } finally {

@@ -13,6 +13,8 @@ import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import SubscriptionPage from './pages/SubscriptionPage';
+import CardDetailsPage from './pages/CardDetailsPage';
+import SubscriptionSuccessPage from './pages/SubscriptionSuccessPage';
 import DashboardPage from './pages/DashboardPage';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -21,10 +23,8 @@ import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
-    // Provide authentication context to the whole app
     <AuthProvider>
       <Routes>
-        {/* Main layout wrapper */}
         <Route path="/" element={<Layout />}>
           {/* Public routes */}
           <Route index element={<HomePage />} />
@@ -38,8 +38,24 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="subscription" element={<SubscriptionPage />} />
-
-          {/* Protected route example */}
+          
+          {/* Protected routes */}
+          <Route
+            path="subscription/card-details"
+            element={
+              <ProtectedRoute>
+                <CardDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="subscription/success"
+            element={
+              <ProtectedRoute>
+                <SubscriptionSuccessPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="dashboard"
             element={

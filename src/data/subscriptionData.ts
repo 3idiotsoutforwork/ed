@@ -13,6 +13,7 @@ export interface SubscriptionPlan {
   mostPopular?: boolean;
   color: string;
   savings?: string;
+  stripePriceId: string; // Add this field
 }
 
 const subscriptionPlans: SubscriptionPlan[] = [
@@ -23,6 +24,7 @@ const subscriptionPlans: SubscriptionPlan[] = [
     period: 'month',
     description: 'Basic access to educational content',
     color: 'gray',
+    stripePriceId: '', // Free plan doesn't need a price ID
     features: [
       { name: 'Access to 4 games', included: true },
       { name: 'Basic activities', included: true },
@@ -43,6 +45,7 @@ const subscriptionPlans: SubscriptionPlan[] = [
     period: 'month',
     description: 'Perfect for casual learners',
     color: 'primary',
+    stripePriceId: 'ADD_YOUR_BASIC_PLAN_PRICE_ID_HERE', // Replace with your price ID
     features: [
       { name: 'Access to all games', included: true },
       { name: 'All basic activities', included: true },
@@ -64,6 +67,7 @@ const subscriptionPlans: SubscriptionPlan[] = [
     description: 'The complete educational experience',
     mostPopular: true,
     color: 'secondary',
+    stripePriceId: 'ADD_YOUR_PREMIUM_PLAN_PRICE_ID_HERE', // Replace with your price ID
     features: [
       { name: 'Access to all games', included: true },
       { name: 'All activities and worksheets', included: true },
@@ -85,6 +89,7 @@ const subscriptionPlans: SubscriptionPlan[] = [
     description: 'Our best value option',
     color: 'accent',
     savings: 'Save 20%',
+    stripePriceId: 'ADD_YOUR_PREMIUM_ANNUAL_PLAN_PRICE_ID_HERE', // Replace with your price ID
     features: [
       { name: 'All Premium features', included: true },
       { name: 'Unlimited child profiles', included: true },
